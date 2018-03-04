@@ -78,11 +78,16 @@ doc_events = {
 # ---------------
 
 scheduler_events = {
-	"hourly": [
+	# "hourly": [
+	# 	"erpnext_shopify.api.sync_shopify"
+	# ],
+	"all":
+	[
 		"erpnext_shopify.api.sync_shopify"
 	],
 	"daily": [
-		"erpnext_shopify.billing.send_payment_notification_to_user"
+		"erpnext_shopify.billing.send_payment_notification_to_user",
+		"erpnext_shopify.api.sync_shopify"
 	]
 }
 
