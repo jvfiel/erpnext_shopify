@@ -40,6 +40,7 @@ def sync_shopify():
 
 
         if sync:
+            print "will sync."
             enqueue("erpnext_shopify.api.sync_shopify_resources", queue='long', timeout=1500)
             frappe.msgprint(_("Queued for syncing. It may take a few minutes to an hour if this is your first sync."))
 
@@ -48,10 +49,12 @@ def sync_shopify():
             # frappe.db.set_value("Shopify Settings", None, "last_sync_datetime", now_time) #DEBUG
             # print "will sync"
         else:
+            print "not yet time to sync. next time {0}".format(next_sync)
             frappe.msgprint(_("Cannot Sync Now. Next Sync {0}".format(next_sync)))
 
 
     else:
+        print "sync every not specified."
         frappe.msgprint(_("Sync Every was not specified. Please Sync again."))
         shopify_settings.sync_every = 5
         shopify_settings.save()

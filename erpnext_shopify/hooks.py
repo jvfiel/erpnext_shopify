@@ -69,26 +69,26 @@ after_install = "erpnext_shopify.after_install.create_weight_uom"
 # Hook on document methods and events
 
 doc_events = {
-	"Bin": {
-		"on_update": "erpnext_shopify.sync_products.trigger_update_item_stock"
-	}
+    "Bin": {
+        "on_update": "erpnext_shopify.sync_products.trigger_update_item_stock"
+    }
 }
 
 # Scheduled Tasks
 # ---------------
 
 scheduler_events = {
-	# "hourly": [
-	# 	"erpnext_shopify.api.sync_shopify"
-	# ],
-	"all":
-	[
-		"erpnext_shopify.api.sync_shopify"
-	],
-	"daily": [
-		"erpnext_shopify.billing.send_payment_notification_to_user",
-		"erpnext_shopify.api.sync_shopify"
-	]
+    # "hourly": [
+    # 	"erpnext_shopify.api.sync_shopify"
+    # ],
+    "all":
+        [
+            "erpnext_shopify.api.sync_shopify"
+        ],
+    "daily": [
+        "erpnext_shopify.billing.send_payment_notification_to_user",
+        # "erpnext_shopify.api.sync_shopify"
+    ]
 }
 
 # Testing
@@ -102,4 +102,3 @@ scheduler_events = {
 # override_whitelisted_methods = {
 # 	"frappe.desk.doctype.event.event.get_events": "erpnext_shopify.event.get_events"
 # }
-
