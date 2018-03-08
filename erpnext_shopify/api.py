@@ -29,7 +29,13 @@ def sync_shopify():
             # sync = 1
             # print "now", frappe.utils.now()
             # print "last_sync_datetime ", shopify_settings.last_sync_datetime
-            next_sync = datetime.datetime.strptime(shopify_settings.last_sync_datetime,'%Y-%m-%d %H:%M:%S.%f') + datetime.timedelta(minutes=shopify_settings.sync_every)
+            try:
+                next_sync = datetime.datetime.strptime(shopify_settings.last_sync_datetime,'%Y-%m-%d %H:%M:%S.%f') + datetime.timedelta(minutes=shopify_settings.sync_every)
+
+            except:
+                next_sync = datetime.datetime.strptime(shopify_settings.last_sync_datetime,'%Y-%m-%d %H:%M:%S') + datetime.timedelta(minutes=shopify_settings.sync_every)
+
+
             # print "next sync", next_sync
             if now >= next_sync:
                 sync = 1
@@ -49,7 +55,7 @@ def sync_shopify():
             # frappe.db.set_value("Shopify Settings", None, "last_sync_datetime", now_time) #DEBUG
             # print "will sync"
         else:
-            print "not yet time to sync. next time {0}".format(next_sync)
+            print "not yet time to sync. next time {0}. Time now is {1}".format(next_sync,now)
             frappe.msgprint(_("Cannot Sync Now. Next Sync {0}".format(next_sync)))
 
 
